@@ -1,0 +1,58 @@
+# 🔹 Arquivos de ambiente
+.env
+.env.local
+
+# 🔹 Cache e arquivos compilados Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.cache
+
+# 🔹 Pastas de dependências/virtualenv
+venv/
+env/
+ENV/
+.venv/
+
+# 🔹 Logs
+*.log
+logs/
+*.out
+*.err
+
+# 🔹 Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# 🔹 Arquivos temporários
+*.tmp
+*.swp
+*.swo
+
+# 🔹 Configurações do editor
+.vscode/
+.idea/
+
+# 🔹 Pytest / coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# 🔹 Jupyter
+.ipynb_checkpoints/
+
+# 🔹 Build / dist
+build/
+dist/
+*.egg-info/
+.eggs/
