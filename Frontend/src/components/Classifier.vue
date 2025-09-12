@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch, defineProps } from 'vue';
+
+const props = defineProps<{
+  exampleText?: string
+}>()
+
+watch(() => props.exampleText, (newText) => {
+  if (newText) text.value = newText
+})
 
 const text = ref<string>('');
 const isDragging = ref<boolean>(false);
