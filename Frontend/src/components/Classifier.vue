@@ -48,6 +48,7 @@ const classifyTextBackend = async () => {
     }
 
     try {
+        console.log("Enviando para o backend:", payload);
         const res = await fetch("https://projeto-email.onrender.com/classify", {
             method: "POST",
             headers: headers,
