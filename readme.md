@@ -113,11 +113,5 @@ Certifique-se de ter o **Node.js** e o **Python 3.8+** instalados.
 
 -----
 
-## 🧑‍💻 Feito por
-
-Este projeto foi desenvolvido por:
-
-    
-
-  * [Marlon Alves](https://github.com/Marlonalvss)
+## 🧑‍💻 Feito por: [Marlon Alves](https://github.com/Marlonalvss)
   * [LinkedIn](https://www.linkedin.com/in/marlon-alvss/)
