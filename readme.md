@@ -6,6 +6,9 @@ O **Classificador de E-mail Inteligente** é uma aplicação web interativa que 
 
 Este projeto demonstra a integração entre um frontend moderno em **Vue.js** e um backend em **FastAPI** para processamento de linguagem natural, aproveitando ao máximo as capacidades de IA do Google Gemini.
 
+🌍 **Teste agora:** [Clique aqui para acessar o site 🚀](https://projeto-email-front.onrender.com/)  
+
+
 -----
 
 ## ✨ Funcionalidades
@@ -19,28 +22,29 @@ Este projeto demonstra a integração entre um frontend moderno em **Vue.js** e 
 
 -----
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas  
 
-### Frontend
+### Frontend  
+- **Vue.js**  
+- **TypeScript**  
+- **Tailwind CSS**  
 
-  * **Vue.js**: Framework JavaScript progressivo para a construção da interface do usuário.
-  * **TypeScript**: Adiciona tipagem estática ao JavaScript para um código mais robusto.
-  * **Tailwind CSS**: Framework CSS utilitário para estilização rápida e responsiva.
+### Backend  
+- **Python + FastAPI**  
+- **Gemini (Google Generative AI)**  
+- **python-dotenv**  
+- **PyPDF2**  
+- **uvicorn**  
+- **nltk** (incluindo `stopwords`, baixadas no deploy)  
 
-### Backend
+> 💡 Todo o **requirements.txt** já inclui as dependências necessárias para rodar o projeto sem dor de cabeça.  
 
-  * **Python**: Linguagem de programação principal para o backend.
-  * **FastAPI**: Framework web de alta performance para a construção da API.
-  * **Gemini (Google Generative AI)**: Modelo de linguagem avançado do Google para análise e classificação do texto.
-  * **`python-dotenv`**: Gerencia variáveis de ambiente.
-  * **`PyPDF2`**: Biblioteca para extrair texto de arquivos PDF.
-  * **`uvicorn`**: Servidor ASGI leve para rodar a aplicação FastAPI.
+### Deploy  
+🚀 O **Frontend** e o **Backend** foram hospedados no [Render](https://render.com).  
 
 -----
 
 ## 📸 Fotos do Projeto
-
-*Adicione aqui as fotos da aplicação em funcionamento, mostrando a interface, o tema claro/escuro e os resultados da classificação.*
 
 **Foto 1: Interface Principal**
 *![Interface Principal](./Docs/Screenshot%202025-09-12%20at%2022-06-36%20Classificador%20de%20E-mails.png)*
@@ -114,5 +118,18 @@ Certifique-se de ter o **Node.js** e o **Python 3.8+** instalados.
 
 -----
 
-## 🧑‍💻 Feito por: [Marlon Alves](https://github.com/Marlonalvss)
-  * [LinkedIn](https://www.linkedin.com/in/marlon-alvss/)
+## 🧑‍💻 Feito por :
+
+<p align="center">
+  <img src="https://avatars.githubusercontent.com/u/86992904?v=4" alt="Foto do Marlon" width="200" style="border-radius:50%"/>
+</p>
+
+<h3 align="center">Marlon Alves</h3>
+<p align="center">A arte mova a criatividade.</p>
+
+<p align="center">
+  <a href="https://github.com/Marlonalvss">🌐 GitHub</a> • 
+  <a href="https://www.linkedin.com/in/marlon-alvss/">💼 LinkedIn</a>
+</p>
+
+  
