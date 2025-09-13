@@ -12,10 +12,10 @@ import ThemeToggle from './UI/ThemeToggle.vue';
       </div>
       <div class="mx-auto max-w-3xl text-center">
         <h1 class="mb-6 text-4xl font-bold text-[var(--chat-text)] md:text-6xl">
-          Classificador de Texto Inteligente
+          Classificador de E-mail Inteligente
         </h1>
         <p class="text-lg text-[var(--chat-text)] md:text-xl">
-          Analise e compreenda o significado de seu texto instantaneamente.
+          Analise e compreenda o significado de seu e-mail instantaneamente.
         </p>
       </div>
     </div>
