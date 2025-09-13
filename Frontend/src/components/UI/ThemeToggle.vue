@@ -1,4 +1,4 @@
-// src/components/ThemeToggle.vue
+// src/components/UI/ThemeToggle.vue
 <script setup lang="ts">
 import { ref } from 'vue'
 
@@ -32,9 +32,8 @@ const toggleTheme = () => {
     <span v-else>
       <!-- Ícone Lua mais fina -->
       <svg xmlns="http://www.w3.org/2000/svg" class="inline h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
-  <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
-</svg>
-
+        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+      </svg>
     </span>
   </button>
 </template>

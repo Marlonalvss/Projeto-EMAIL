@@ -172,7 +172,7 @@ const getClassificationColor = (classification: string) => {
     <div class="mx-auto max-w-full md:max-w-6xl">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-        <div class="rounded-lg border p-6 shadow-soft transition-shadow duration-300 hover:shadow-lg bg-[var(--chat-card)] border-[var(--chat-text)] hover:border-blue-500">
+        <div class="rounded-lg border p-6 shadow-md transition-shadow duration-300 hover:shadow-lg bg-[var(--chat-card)] border-[var(--chat-text)] hover:border-blue-500">
           <div class="border-b pb-4 border-[var(--chat-text)]">
             <h2 class="text-2xl font-bold text-[var(--chat-text)]">Insira seu Texto</h2>
           </div>
@@ -203,7 +203,7 @@ const getClassificationColor = (classification: string) => {
 
             <div v-if="attachedFileName"
               class="mt-4 flex items-center justify-between rounded-lg p-3 shadow-sm bg-[var(--chat-card)] border border-[var(--chat-text)] overflow-auto">
-              <span class="text-sm font-medium text-[var(--chat-text)] truncate break-words">
+              <span class="text-sm font-medium text-[var(--chat-text)] truncate break-all">
                 Arquivo anexado: {{ attachedFileName }}
               </span>
               <button @click="removeFile"
@@ -232,7 +232,7 @@ const getClassificationColor = (classification: string) => {
           </div>
         </div>
 
-        <div class="rounded-lg border p-6 shadow-soft transition-shadow duration-300 hover:shadow-lg bg-[var(--chat-card)] border-[var(--chat-text)]   hover:border-blue-500">
+        <div class="rounded-lg border p-6 shadow-md transition-shadow duration-300 hover:shadow-lg bg-[var(--chat-card)] border-[var(--chat-text)]   hover:border-blue-500">
           <div class="border-b pb-4 border-[var(--chat-text)]">
             <h2 class="text-2xl font-bold text-[var(--chat-text)]">Resultados da Classificação</h2>
           </div>

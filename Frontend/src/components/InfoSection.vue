@@ -13,7 +13,7 @@ const toggleExpand = (cardIndex: number) => {
         <div class="mx-auto max-w-4xl">
             <div class="grid gap-8 md:grid-cols-2 items-start">
                 <div
-                    class="group rounded-2xl border p-8 shadow-soft transition-shadow duration-300 hover:shadow-lg min-h-80 bg-[var(--chat-card)] dark:border-gray-700">
+                    class="group rounded-2xl border p-8 shadow-md transition-shadow duration-300 hover:shadow-lg min-h-[20rem] bg-[var(--chat-card)] dark:border-gray-700">
                     <div class="cursor-pointer" @click="toggleExpand(1)">
                         <h3
                             class="mb-4 text-2xl font-bold text-[var(--chat-text)] group-hover:text-blue-500 transition-colors duration-300">
@@ -105,7 +105,8 @@ const toggleExpand = (cardIndex: number) => {
                     </Transition>
 
                     <button @click.stop="toggleExpand(2)"
-                        class="mt-4 w-full rounded-md border border-blue-500 py-2 text-sm text-[var(--chat-text)] transition-colors duration-300 hover:bg-blue-500 hover:text-white">
+                        class="mt-4 w-full rounded-md border border-blue-500 py-2 text-sm text-[var(--chat-text)] transition-colors duration-300 hover:bg-[var(--chat-accent)] hover:text-white"
+                        :aria-expanded="expandedCard === 2">
                         {{ expandedCard === 2 ? 'Ver Menos' : 'Saiba mais' }}
                     </button>
                 </div>
