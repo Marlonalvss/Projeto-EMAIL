@@ -48,7 +48,7 @@ const classifyTextBackend = async () => {
     }
 
     try {
-        const res = await fetch("http://localhost:8000/classify", {
+        const res = await fetch("https://projeto-email.onrender.com/classify", {
             method: "POST",
             headers: headers,
             body: requestBody
@@ -94,7 +94,7 @@ const regenerateSuggestion = async () => {
     isSuggestionLoading.value = true;
 
     try {
-        const res = await fetch("http://localhost:8000/regenerate-suggestion", {
+        const res = await fetch("https://projeto-email.onrender.com/regenerate-suggestion", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

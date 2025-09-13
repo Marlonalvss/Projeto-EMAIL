@@ -15,11 +15,14 @@ app = FastAPI()
 
 # 🔹 CORS
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+CORSMiddleware,
+allow_origins=[
+    "https://projeto-email-front.onrender.com",
+    "http://localhost:5173", # Adicionado para desenvolvimento local
+],
+allow_credentials=True,
+allow_methods=["*"],
+allow_headers=["*"],
 )
 
 # 🔹 Pré-processamento de texto para NLP
