@@ -6,7 +6,7 @@ O **Classificador de E-mail Inteligente** é uma aplicação web interativa que 
 
 Este projeto demonstra a integração entre um frontend moderno em **Vue.js** e um backend em **FastAPI** para processamento de linguagem natural, aproveitando ao máximo as capacidades de IA do Google Gemini.
 
-🌍 **Teste agora:** [Clique aqui para acessar o site 🚀](https://projeto-email-front.onrender.com/)  
+🌍 **Teste agora:** <a href="https://projeto-email-front.onrender.com/" target="_blank" rel="noopener noreferrer">Clique aqui para acessar o site 🚀</a>
 
 
 -----
@@ -40,7 +40,7 @@ Este projeto demonstra a integração entre um frontend moderno em **Vue.js** e 
 > 💡 Todo o **requirements.txt** já inclui as dependências necessárias para rodar o projeto sem dor de cabeça.  
 
 ### Deploy  
-🚀 O **Frontend** e o **Backend** foram hospedados no [Render](https://render.com).  
+🚀 O **Frontend** e o **Backend** foram hospedados no 🌍 **Render** <a href="https://render.com/" target="_blank" rel="noopener noreferrer">Clique aqui para acessar o site 🚀</a>.  
 
 -----
 
