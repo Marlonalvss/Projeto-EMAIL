@@ -169,8 +169,8 @@ const getClassificationColor = (classification: string) => {
 
 <template>
   <section class="container mx-auto px-4 py-16 bg-[var(--chat-bg)]">
-    <div class="mx-auto max-w-6xl">
-      <div class="grid gap-8 md:grid-cols-2">
+    <div class="mx-auto max-w-full md:max-w-6xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
         <div class="rounded-lg border p-6 shadow-soft transition-shadow duration-300 hover:shadow-lg bg-[var(--chat-card)] border-[var(--chat-text)] hover:border-blue-500">
           <div class="border-b pb-4 border-[var(--chat-text)]">
@@ -202,8 +202,8 @@ const getClassificationColor = (classification: string) => {
             </div>
 
             <div v-if="attachedFileName"
-              class="mt-4 flex items-center justify-between rounded-lg p-3 shadow-sm bg-[var(--chat-card)] border border-[var(--chat-text)]">
-              <span class="text-sm font-medium text-[var(--chat-text)] truncate">
+              class="mt-4 flex items-center justify-between rounded-lg p-3 shadow-sm bg-[var(--chat-card)] border border-[var(--chat-text)] overflow-auto">
+              <span class="text-sm font-medium text-[var(--chat-text)] truncate break-words">
                 Arquivo anexado: {{ attachedFileName }}
               </span>
               <button @click="removeFile"
@@ -246,7 +246,7 @@ const getClassificationColor = (classification: string) => {
                 </span>
               </div>
 
-              <div class="rounded-lg p-4 border bg-[var(--chat-card)] border-[var(--chat-text)] relative hover:border-blue-500 transition-colors duration-200">
+              <div class="rounded-lg p-4 border bg-[var(--chat-card)] border-[var(--chat-text)] relative hover:border-blue-500 transition-colors duration-200 flex flex-col">
                 <h4 class="mb-2 font-semibold text-[var(--chat-text)]">Sugestão de Resposta / Ação</h4>
                 <button @click="copySuggestion" class="absolute top-4 right-4 text-[var(--chat-text)] hover:text-[var(--chat-accent)] cursor-pointer" aria-label="Copiar sugestão">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -257,12 +257,14 @@ const getClassificationColor = (classification: string) => {
                 <p class="text-sm text-[var(--chat-text)] leading-relaxed">{{ result.suggestion }}</p>
                 
                 <button
-                    @click="regenerateSuggestion"
-                    :disabled="isSuggestionLoading"
-                    class="mt-4 w-full rounded-md py-2 text-sm font-semibold transition-colors duration-300
-                            bg-[var(--chat-accent)] text-white hover:bg-[var(--chat-accent)]/90 disabled:bg-gray-400"
+                  @click="regenerateSuggestion"
+                  :disabled="isSuggestionLoading"
+                  class="mt-8 w-full rounded-md py-2 text-sm font-semibold transition-colors duration-300
+                         bg-[var(--chat-accent)] text-white hover:bg-[var(--chat-accent)]/90 disabled:bg-gray-400 cursor-pointer"
+                  :class="{ 'cursor-pointer': !isSuggestionLoading }"
+                  style="align-self: flex-end;"
                 >
-                    {{ isSuggestionLoading ? 'Gerando...' : 'Gerar Nova Sugestão' }}
+                  {{ isSuggestionLoading ? 'Gerando...' : 'Gerar Nova Sugestão' }}
                 </button>
               </div>
             </div>

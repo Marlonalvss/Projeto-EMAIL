@@ -1,6 +1,6 @@
 // src/components/ThemeToggle.vue
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 
 const theme = ref<'light' | 'dark'>('light')
 
@@ -31,14 +31,10 @@ const toggleTheme = () => {
     </span>
     <span v-else>
       <!-- Ícone Lua mais fina -->
-      <svg xmlns="http://www.w3.org/2000/svg" class="inline h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path
-          stroke="currentColor"
-          stroke-width="2"
-          fill="currentColor"
-          d="M21 12.5A9 9 0 1111.5 3c0 .28.02.56.05.83A7 7 0 0020.17 15.45c.27.03.55.05.83.05z"
-        />
-      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" class="inline h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+  <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+</svg>
+
     </span>
   </button>
 </template>
