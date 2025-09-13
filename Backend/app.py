@@ -24,7 +24,7 @@ except LookupError:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173","https://projeto-email-front.onrender.com/"  # Desenvolvimento local
+        "https://projeto-email-front.onrender.com",  # Desenvolvimento local
     ],
     allow_credentials=True,
     allow_methods=["*"],
