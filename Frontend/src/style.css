@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+:root {
+  --chat-light-bg-60: #f3f6ff;
+  --chat-light-card-30: #ffffff;
+  --chat-light-accent-10: #2563eb;
+  --chat-light-text: #0f172a;
+
+  --chat-dark-bg-60: #0b1220;
+  --chat-dark-card-30: #0f1724;
+  --chat-dark-accent-10: #2563eb;
+  --chat-dark-text: #e6eef8;
+}
+
+[data-theme='light'] {
+  --chat-bg: var(--chat-light-bg-60);
+  --chat-card: var(--chat-light-card-30);
+  --chat-accent: var(--chat-light-accent-10);
+  --chat-text: var(--chat-light-text);
+}
+
+[data-theme='dark'] {
+  --chat-bg: var(--chat-dark-bg-60);
+  --chat-card: var(--chat-dark-card-30);
+  --chat-accent: var(--chat-dark-accent-10);
+  --chat-text: var(--chat-dark-text);
+}
