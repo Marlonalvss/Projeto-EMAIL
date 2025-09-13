@@ -94,3 +94,31 @@ Email:
 
     print("[INFO] Classificação concluída.\n")
     return result
+
+def regenerate_suggestion(email_text: str, classification: str):
+    """
+    Gera uma nova sugestão de resposta baseada no texto e na classificação fornecida.
+    """
+    print("[INFO] Iniciando regeneração de sugestão...")
+    try:
+        model = genai.GenerativeModel("gemini-2.5-flash")
+        
+        # Prompt para gerar apenas a sugestão
+        prompt = f"""
+Com base no seguinte e-mail e em sua classificação já definida como '{classification}', gere uma nova sugestão de resposta concisa, profissional e pronta para uso.
+
+E-mail:
+{email_text}
+
+Sua resposta deve ser estritamente no formato JSON, com um único campo: "suggestion".
+
+**Formato esperado de saída:**
+{{"suggestion": "..."}}
+"""
+        response = model.generate_content(prompt)
+        cleaned_text = response.text.replace('```json', '').replace('```', '').strip()
+        result = json.loads(cleaned_text)
+        return result
+    except Exception as e:
+        print(f"[ERRO] Ocorreu um erro na regeneração: {e}")
+        return {"suggestion": "Não foi possível gerar uma nova sugestão."}

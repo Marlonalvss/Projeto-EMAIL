@@ -14,6 +14,7 @@ const isDragging = ref<boolean>(false);
 const attachedFileName = ref<string | null>(null);
 const attachedFile = ref<File | null>(null);
 const isLoading = ref<boolean>(false);
+const isSuggestionLoading = ref<boolean>(false);
 
 const result = ref<{
     classification: string;
@@ -79,6 +80,37 @@ const copySuggestion = () => {
     }
 };
 
+const regenerateSuggestion = async () => {
+    if (!text.value.trim() || !result.value) {
+        return;
+    }
+
+    isSuggestionLoading.value = true;
+    
+    try {
+        const res = await fetch("http://localhost:8000/regenerate-suggestion", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                text: text.value,
+                classification: result.value.classification
+            })
+        });
+
+        if (!res.ok) throw new Error("Erro na requisição ao backend");
+
+        const data = await res.json();
+        const newSuggestion = data.result.suggestion || "Sem sugestão";
+        
+        result.value.suggestion = newSuggestion;
+    } catch (error) {
+        console.error(error);
+        alert("Erro ao gerar uma nova sugestão.");
+    } finally {
+        isSuggestionLoading.value = false;
+    }
+};
+
 
 const handleFileSelect = (event: Event) => {
     const target = event.target as HTMLInputElement;
@@ -140,7 +172,6 @@ const getClassificationColor = (classification: string) => {
     <div class="mx-auto max-w-6xl">
       <div class="grid gap-8 md:grid-cols-2">
 
-        <!-- Card de Inserir Texto -->
         <div class="rounded-lg border p-6 shadow-soft transition-shadow duration-300 hover:shadow-lg bg-[var(--chat-card)] border-[var(--chat-text)] hover:border-blue-500">
           <div class="border-b pb-4 border-[var(--chat-text)]">
             <h2 class="text-2xl font-bold text-[var(--chat-text)]">Insira seu Texto</h2>
@@ -152,7 +183,6 @@ const getClassificationColor = (classification: string) => {
               :disabled="!!attachedFileName"
               class="w-full min-h-[180px] resize-none rounded-md border p-3 bg-[var(--chat-card)] text-[var(--chat-text)] focus:border-[var(--chat-accent)] focus:ring-2 focus:ring-[var(--chat-accent)] transition-colors duration-300  hover:border-blue-500"
             ></textarea>
-            <!-- Área de Upload -->
             <div v-if="!attachedFileName"
               class="mt-4 cursor-pointer flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 text-center transition-colors duration-300 hover:border-blue-500"
               :class="{
@@ -171,7 +201,6 @@ const getClassificationColor = (classification: string) => {
               <p class="text-xs text-[var(--chat-text)]">(Apenas .txt e .pdf)</p>
             </div>
 
-            <!-- Arquivo anexado -->
             <div v-if="attachedFileName"
               class="mt-4 flex items-center justify-between rounded-lg p-3 shadow-sm bg-[var(--chat-card)] border border-[var(--chat-text)]">
               <span class="text-sm font-medium text-[var(--chat-text)] truncate">
@@ -190,7 +219,6 @@ const getClassificationColor = (classification: string) => {
 
             <input type="file" id="file-upload-input" class="hidden" @change="handleFileSelect" accept=".txt,.pdf" />
 
-            <!-- Botão -->
             <button
   @click="classifyTextBackend"
   :disabled="(!text.trim() && !attachedFile) || isLoading"
@@ -204,7 +232,6 @@ const getClassificationColor = (classification: string) => {
           </div>
         </div>
 
-        <!-- Card de Resultados -->
         <div class="rounded-lg border p-6 shadow-soft transition-shadow duration-300 hover:shadow-lg bg-[var(--chat-card)] border-[var(--chat-text)]   hover:border-blue-500">
           <div class="border-b pb-4 border-[var(--chat-text)]">
             <h2 class="text-2xl font-bold text-[var(--chat-text)]">Resultados da Classificação</h2>
@@ -228,6 +255,15 @@ const getClassificationColor = (classification: string) => {
                   </svg>
                 </button>
                 <p class="text-sm text-[var(--chat-text)] leading-relaxed">{{ result.suggestion }}</p>
+                
+                <button
+                    @click="regenerateSuggestion"
+                    :disabled="isSuggestionLoading"
+                    class="mt-4 w-full rounded-md py-2 text-sm font-semibold transition-colors duration-300
+                            bg-[var(--chat-accent)] text-white hover:bg-[var(--chat-accent)]/90 disabled:bg-gray-400"
+                >
+                    {{ isSuggestionLoading ? 'Gerando...' : 'Gerar Nova Sugestão' }}
+                </button>
               </div>
             </div>
 
@@ -236,11 +272,10 @@ const getClassificationColor = (classification: string) => {
                 <div class="loader mb-2"></div>
                 <span>Classificando...</span>
               </div>
-              <p v-else>Digite um texto ou anexe um arquivo para ver os resultados.</p>
+              <p v-else-if="!result">Digite um texto ou anexe um arquivo para ver os resultados.</p>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>

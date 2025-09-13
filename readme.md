@@ -12,6 +12,7 @@ Este projeto demonstra a integração entre um frontend moderno em **Vue.js** e 
 
   * **Classificação Instantânea**: Analisa e classifica o conteúdo do e-mail em uma das duas categorias: "Produtivo" ou "Improdutivo".
   * **Sugestão de Resposta**: Gera uma sugestão de resposta concisa e formal para e-mails, otimizando o fluxo de trabalho.
+  * **Gerar Nova Resposta**: Permite gerar uma nova sugestão de resposta mantendo a classificação original do e-mail.
   * **Múltiplos Formatos de Entrada**: Suporta a entrada de texto diretamente no campo de texto ou o upload de arquivos `.txt` e `.pdf`.
   * **Interface Intuitiva**: Interface de usuário moderna e responsiva, construída com **Vue.js** e **Tailwind CSS**.
   * **Suporte a Dark/Light Mode**: Inclui um seletor para alternar entre os temas claro e escuro.
@@ -45,7 +46,7 @@ Este projeto demonstra a integração entre um frontend moderno em **Vue.js** e 
 *![Interface Principal](./Docs/Screenshot%202025-09-12%20at%2022-06-36%20Classificador%20de%20E-mails.png)*
 
 **Foto 2: Exemplo de Classificação**
-*![Exemplo de Classificação](./Docs/Screenshot%202025-09-12%20at%2022-07-35%20Classificador%20de%20E-mails.png)*
+*![Exemplo de Classificação](./Docs/Screenshot%202025-09-13%20at%2012-53-02%20Classificador%20de%20E-mails.png)*
 
 **Foto 3: Tema Escuro**
 *![Tema Escuro](./Docs/Screenshot%202025-09-12%20at%2022-06-44%20Classificador%20de%20E-mails.png)*
