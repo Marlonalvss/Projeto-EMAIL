@@ -9,15 +9,21 @@ load_dotenv()
 
 api_key = os.getenv("GEMINI_API_KEY")
 if not api_key:
-    raise ValueError("[ERRO] A chave GEMINI_API_KEY não foi encontrada no .env!")
+    # A exceção agora inclui uma mensagem mais clara para o deploy
+    raise ValueError("[ERRO] A chave GEMINI_API_KEY não foi encontrada! Certifique-se de que a variável de ambiente está configurada no Render.")
+
+# 🔹 LINHA ADICIONAL PARA DEPURAR
+if api_key:
+    print(f"[DEBUG] Chave da API lida com sucesso. (Tamanho: {len(api_key)})")
+else:
+    print("[DEBUG] A variável GEMINI_API_KEY está vazia ou não foi lida.")
+
 
 print("[INFO] Configurando Gemini...")
 genai.configure(api_key=api_key)
 print("[INFO] Gemini configurado com sucesso!")
 
 # 🔹 Define o modelo com as instruções de sistema
-# Esta é a melhoria principal: as regras de comportamento ficam aqui, fora do prompt
-# de cada chamada. Isso economiza tokens.
 model = genai.GenerativeModel(
     model_name="gemini-2.5-flash",
     system_instruction="""
@@ -49,9 +55,6 @@ def classify_email(email_text: str):
 
     try:
         # 🔹 Prompt otimizado
-        # Agora o prompt é muito mais simples, contendo apenas o e-mail
-        # e uma instrução breve, pois as regras de comportamento já
-        # estão no `system_instruction` do modelo.
         prompt = f"""
         Email:
         {email_text}
@@ -85,7 +88,7 @@ def classify_email(email_text: str):
         print(f"[ERRO] Ocorreu um erro na classificação: {e}")
         result = {
             "classification": "Desconhecido",
-            "suggestion": "Não foi possível classificar o e-mail. Tente novamente."
+            "suggestion": "Não foi possível classificar o o e-mail. Tente novamente."
         }
 
     print("[INFO] Classificação concluída.\n")
@@ -97,9 +100,6 @@ def regenerate_suggestion(email_text: str, classification: str):
     """
     print("[INFO] Iniciando regeneração de sugestão...")
     try:
-        # 🔹 Usando o modelo já instanciado, se possível.
-        # Mas para simplificar, você pode criar um novo
-        # se o contexto for diferente.
         model_regenerate = genai.GenerativeModel("gemini-2.5-flash")
         
         # Prompt para gerar apenas a sugestão
