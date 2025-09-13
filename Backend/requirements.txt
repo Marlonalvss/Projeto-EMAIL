@@ -4,4 +4,4 @@ python-dotenv
 google-generativeai
 PyPDF2
 typing-extensions
-
+nltk
