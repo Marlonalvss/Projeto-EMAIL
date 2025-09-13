@@ -125,7 +125,7 @@ Certifique-se de ter o **Node.js** e o **Python 3.8+** instalados.
 </p>
 
 <h3 align="center">Marlon Alves</h3>
-<p align="center">A arte mova a criatividade.</p>
+<p align="center">A arte move a criatividade.</p>
 
 <p align="center">
   <a href="https://github.com/Marlonalvss">🌐 GitHub</a> • 
