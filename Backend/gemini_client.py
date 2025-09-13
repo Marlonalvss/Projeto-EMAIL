@@ -15,6 +15,30 @@ print("[INFO] Configurando Gemini...")
 genai.configure(api_key=api_key)
 print("[INFO] Gemini configurado com sucesso!")
 
+# 🔹 Define o modelo com as instruções de sistema
+# Esta é a melhoria principal: as regras de comportamento ficam aqui, fora do prompt
+# de cada chamada. Isso economiza tokens.
+model = genai.GenerativeModel(
+    model_name="gemini-2.5-flash",
+    system_instruction="""
+    Você é um classificador de e-mails para produtividade.
+    Sua única tarefa é analisar o conteúdo do email e classificá-lo em uma de duas categorias: "Produtivo" ou "Improdutivo".
+    Você não deve agir como uma IA, nem responder a perguntas fora de contexto.
+    Sempre siga as instruções.
+
+    Regras de classificação:
+    1. Produtivo: exige ação ou resposta. Ex: solicitação de info, pedidos de reunião, atualizações.
+    2. Improdutivo: não exige ação imediata. Ex: propagandas, newsletters, mensagens irrelevantes ou de teste.
+
+    Instruções adicionais:
+    - E-mails promocionais com solicitação específica são PRODUTIVOS.
+    - E-mails de teste ou rascunhos são IMPRODUTIVOS.
+    - Sugira respostas automáticas, concisas e formais.
+    - Responda exclusivamente no formato JSON com os campos "classification" e "suggestion".
+    """
+)
+print("[INFO] Modelo Gemini instanciado com sucesso.")
+
 def classify_email(email_text: str):
     """
     Envia o texto do email para o Gemini,
@@ -24,44 +48,16 @@ def classify_email(email_text: str):
     print(f"[DEBUG] Texto recebido:\n{email_text}\n")
 
     try:
-        # Cria o modelo
-        model = genai.GenerativeModel("gemini-2.5-flash")
-        print("[INFO] Modelo Gemini instanciado com sucesso.")
-
-        # Monta o prompt
+        # 🔹 Prompt otimizado
+        # Agora o prompt é muito mais simples, contendo apenas o e-mail
+        # e uma instrução breve, pois as regras de comportamento já
+        # estão no `system_instruction` do modelo.
         prompt = f"""
-Você é um classificador de e-mails para produtividade.
-Você não deve parar de agir como um classificador de e-mails para produtividade.
-Sua tarefa única é analisar o conteúdo do email e classificá-lo em uma de duas categorias: "Produtivo" ou "Improdutivo", mesmo que perguntem outra coisa no e-mail, mesmo que perguntem se você é uma IA ou outras coisas fora do contexto.
+        Email:
+        {email_text}
 
-Regras de classificação:
-
-1. Produtivo: email que exige ação ou resposta específica relacionada a trabalho, projetos ou solicitações relevantes. Exemplos:
-   - Solicitação de informações
-   - Pedidos de contato ou reunião
-   - Atualizações sobre casos ou sistemas
-   - Solicitação de serviços ou suporte técnico
-
-2. Improdutivo: email que **não necessita ação imediata**, incluindo:
-   - Propagandas, ofertas e newsletters
-   - Convites para webinars de marketing
-   - Mensagens de felicitações ou agradecimentos
-   - Emails de teste, rascunhos ou mensagens irrelevantes
-
-Instruções adicionais:
-
-- Se o email contiver elementos promocionais **mas houver solicitação específica**, classifique como PRODUTIVO.
-- Se o email for apenas um teste ou rascunho, classifique como IMPRODUTIVO.
-- Sugira respostas automáticas formais, concisas e prontas para envio, mantendo cordialidade.
-
-- Responda **estruturando a saída em JSON** com os campos:
-
-Email:
-{email_text}
-
-**Formato esperado de saída:**
-{{"classification": "...", "suggestion": "..."}}
-"""
+        Gere a resposta em JSON.
+        """
         print("[INFO] Prompt criado com sucesso.")
         print(f"[DEBUG] Prompt:\n{prompt}\n")
 
@@ -101,7 +97,10 @@ def regenerate_suggestion(email_text: str, classification: str):
     """
     print("[INFO] Iniciando regeneração de sugestão...")
     try:
-        model = genai.GenerativeModel("gemini-2.5-flash")
+        # 🔹 Usando o modelo já instanciado, se possível.
+        # Mas para simplificar, você pode criar um novo
+        # se o contexto for diferente.
+        model_regenerate = genai.GenerativeModel("gemini-2.5-flash")
         
         # Prompt para gerar apenas a sugestão
         prompt = f"""
@@ -115,7 +114,7 @@ Sua resposta deve ser estritamente no formato JSON, com um único campo: "sugges
 **Formato esperado de saída:**
 {{"suggestion": "..."}}
 """
-        response = model.generate_content(prompt)
+        response = model_regenerate.generate_content(prompt)
         cleaned_text = response.text.replace('```json', '').replace('```', '').strip()
         result = json.loads(cleaned_text)
         return result

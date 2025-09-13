@@ -1,26 +1,29 @@
 <script setup lang="ts">
+// Props recebidas do componente pai (exemplo de texto)
 import { ref, watch, defineProps } from 'vue';
 
 const props = defineProps<{
     exampleText?: string
 }>()
 
+// Atualiza o campo de texto quando um exemplo é selecionado
 watch(() => props.exampleText, (newText) => {
     if (newText) text.value = newText
 })
 
+// Variaveis reativas
 const text = ref<string>('');
 const isDragging = ref<boolean>(false);
 const attachedFileName = ref<string | null>(null);
 const attachedFile = ref<File | null>(null);
 const isLoading = ref<boolean>(false);
 const isSuggestionLoading = ref<boolean>(false);
-
 const result = ref<{
     classification: string;
     suggestion: string;
 } | null>(null);
 
+// Função para enviar texto ou arquivo para o backend e obter classificação
 const classifyTextBackend = async () => {
     if (!text.value.trim() && !attachedFile.value) {
         result.value = null;
@@ -68,6 +71,7 @@ const classifyTextBackend = async () => {
     }
 };
 
+// Função para copiar a sugestão gerada para a área de transferência
 const copySuggestion = () => {
     if (result?.value?.suggestion) {
         navigator.clipboard.writeText(result.value.suggestion)
@@ -80,19 +84,21 @@ const copySuggestion = () => {
     }
 };
 
+// Função para solicitar uma nova sugestão ao backend, mantendo a classificação
 const regenerateSuggestion = async () => {
-    if (!text.value.trim() || !result.value) {
-        return;
-    }
+    if (!result.value) return;
+
+    // Usa a sugestão atual como texto base para regenerar
+    const textToSend = result.value.suggestion;
 
     isSuggestionLoading.value = true;
-    
+
     try {
         const res = await fetch("http://localhost:8000/regenerate-suggestion", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                text: text.value,
+                text: textToSend,
                 classification: result.value.classification
             })
         });
@@ -101,7 +107,7 @@ const regenerateSuggestion = async () => {
 
         const data = await res.json();
         const newSuggestion = data.result.suggestion || "Sem sugestão";
-        
+
         result.value.suggestion = newSuggestion;
     } catch (error) {
         console.error(error);
@@ -111,7 +117,7 @@ const regenerateSuggestion = async () => {
     }
 };
 
-
+// Função para tratar seleção de arquivo pelo usuário
 const handleFileSelect = (event: Event) => {
     const target = event.target as HTMLInputElement;
     const files = target.files;
@@ -137,8 +143,13 @@ const handleFileSelect = (event: Event) => {
     target.value = '';
 };
 
+// Função para tratar evento de arrastar arquivo sobre a área de upload
 const handleDragOver = (event: DragEvent) => { event.preventDefault(); isDragging.value = true; };
+
+// Função para tratar evento de sair da área de upload
 const handleDragLeave = (event: DragEvent) => { event.preventDefault(); isDragging.value = false; };
+
+// Função para tratar evento de soltar arquivo na área de upload
 const handleDrop = (event: DragEvent) => {
     event.preventDefault();
     isDragging.value = false;
@@ -148,16 +159,21 @@ const handleDrop = (event: DragEvent) => {
         handleFileSelect(eventMock);
     }
 };
+
+// Função para abrir seletor de arquivo manualmente
 const openFileSelector = () => {
     const fileInput = document.getElementById('file-upload-input');
     if (fileInput) fileInput.click();
 };
+
+// Função para remover arquivo anexado e limpar campo de texto
 const removeFile = () => {
     attachedFileName.value = null;
     attachedFile.value = null;
     text.value = '';
 };
 
+// Função para definir cor do badge de classificação
 const getClassificationColor = (classification: string) => {
     switch (classification.toLowerCase()) {
         case 'produtivo': return 'bg-green-500 text-white';
@@ -181,7 +197,7 @@ const getClassificationColor = (classification: string) => {
               placeholder="Cole ou digite seu texto aqui para classificá-lo..." 
               v-model="text"
               :disabled="!!attachedFileName"
-              class="w-full min-h-[180px] resize-none rounded-md border p-3 bg-[var(--chat-card)] text-[var(--chat-text)] focus:border-[var(--chat-accent)] focus:ring-2 focus:ring-[var(--chat-accent)] transition-colors duration-300  hover:border-blue-500"
+              class="w-full min-h-[180px] resize-none rounded-md border p-3 bg-[var(--chat-card)] text-[var(--chat-text)] focus:border-[var(--chat-accent] focus:ring-2 focus:ring-[var(--chat-accent)] transition-colors duration-300  hover:border-blue-500"
             ></textarea>
             <div v-if="!attachedFileName"
               class="mt-4 cursor-pointer flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 text-center transition-colors duration-300 hover:border-blue-500"
