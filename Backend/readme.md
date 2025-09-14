@@ -6,10 +6,14 @@ Este projeto é o backend do **Classificador de E-mails Inteligente**, responsá
 
 - **Python 3.10+**
 - **FastAPI**: Framework web rápido para APIs.
-- **PyPDF2**: Leitura de arquivos PDF.
+- **Uvicorn**: Servidor ASGI para FastAPI.
 - **python-dotenv**: Carregamento de variáveis de ambiente.
 - **google-generativeai**: Integração com Gemini API.
-- **Uvicorn**: Servidor ASGI para FastAPI.
+- **PyPDF2**: Leitura e extração de texto de arquivos PDF.
+- **typing-extensions**: Tipagem avançada e compatibilidade.
+- **nltk**: Biblioteca de processamento de linguagem natural (stopwords, stemming, etc.).
+- **python-multipart**: Suporte a upload de arquivos via FormData.
+
 
 ## Instalação
 
@@ -31,7 +35,7 @@ Este projeto é o backend do **Classificador de E-mails Inteligente**, responsá
    ```
    Se não houver um arquivo `requirements.txt`, instale manualmente:
    ```bash
-   pip install fastapi uvicorn PyPDF2 python-dotenv google-generativeai
+   pip install fastapi uvicorn PyPDF2 python-dotenv google-generativeai typing-extensions nltk python-multipart
    ```
 
 4. **Configure a chave da API Gemini:**
