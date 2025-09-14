@@ -74,13 +74,23 @@ Certifique-se de ter o **Node.js** e o **Python 3.8+** instalados.
     cd [Backed ou Frontend]
     ```
 
-2.  Crie um ambiente virtual e instale as dependências do Python:
+2.  🐍 Ambiente Virtual (Opcional)
 
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # No Windows use `venv\Scripts\activate`
-    pip install -r requirements.txt
-    ```
+**Este projeto foi construído fora de ambiente virtual, mas caso prefira utilizar, basta seguir os passos:**
+
+Criar ambiente virtual
+python -m venv venv
+
+Ativar (Linux/Mac)
+source venv/bin/activate
+
+Ativar (Windows)
+venv\Scripts\activate
+
+**⚠️ O uso de ambiente virtual é opcional. O projeto funciona normalmente sem ele.**
+
+# Instalar dependências
+pip install -r requirements.txt
 
 3.  Obtenha uma chave de API do Gemini no [Google AI Studio](https://aistudio.google.com/).
 
@@ -116,6 +126,10 @@ Certifique-se de ter o **Node.js** e o **Python 3.8+** instalados.
 
     A aplicação estará disponível em `http://localhost:5173`.
 
+## 🔄 Rodando Localmente (Atenção aos Caminhos e ao CORS)
+
+Por padrão, a aplicação está configurada para usar os links externos do **Render** (produção).  
+Se você deseja rodar **localmente**, precisa alterar tanto o **endpoint no frontend** quanto a configuração de **CORS no backend**.
 -----
 
 ## 🧑‍💻 Feito por :
