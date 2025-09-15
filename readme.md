@@ -55,6 +55,9 @@ Este projeto demonstra a integração entre um frontend moderno em **Vue.js** e 
 **Foto 3: Tema Escuro**
 *![Tema Escuro](./Docs/Screenshot%202025-09-12%20at%2022-06-44%20Classificador%20de%20E-mails.png)*
 
+**Foto 4: GIF**
+*![Gif](./Docs/chrome-capture-2025-09-15.gif)*
+
 -----
 
 ## ⚙️ Como Utilizar
